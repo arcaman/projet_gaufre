@@ -2,7 +2,6 @@ package joueur;
 import packageGaufre.*;
 
 import java.awt.Point;
-import java.util.ArrayList;
 
 public class IAFacile extends IA{
 

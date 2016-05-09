@@ -1,7 +1,6 @@
 package joueur;
 
 import java.awt.Point;
-import java.util.ArrayList;
 
 import packageGaufre.Controleur;
 import packageGaufre.Model;
