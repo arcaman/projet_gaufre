@@ -9,7 +9,7 @@ public class Controleur {
 	int joueurCourant;
 	static Model donneesJeu;
 
-	public boolean verifiePartieFinieOuNon() {
+	public static boolean verifiePartieFinieOuNon() {
 
 		boolean partieFinie;
 
@@ -26,7 +26,7 @@ public class Controleur {
 
 	}
 
-	public boolean verifieCoupValideOuNon(Point pointJouee) {
+	public static boolean verifieCoupValideOuNon(Point pointJouee) {
 		if (donneesJeu.tabGaufre[pointJouee.x][pointJouee.y] == true) {
 			// le point n a pas ete joue
 			return true;
@@ -35,7 +35,16 @@ public class Controleur {
 		}
 	}
 
-	public void jouer() {
+	public static void jouer() {
+
+		// boucle attente pour savoir si c est l ia ou un joueur qui joue.
+
+		// recuperation d un point depuis l algorithme ou depuis le joueur avec
+		// l ecouteur d event
+
+		Point pointJouee = new Point(1, 2);
+
+		donneesJeu.manger(pointJouee);
 
 	}
 
@@ -43,7 +52,21 @@ public class Controleur {
 		System.out.println("it works !!!");
 
 		donneesJeu = new Model();
-		System.out.println("le contneu de base d une case vaut : " + donneesJeu.tabGaufre[1][1]);
+
+		moteur();
+		// System.out.println("le contneu de base d une case vaut : " +
+		// donneesJeu.tabGaufre[1][1]);
+
+	}
+
+	public static void moteur() {
+
+		while (verifiePartieFinieOuNon() == false) {
+
+			Point pointJouee = new Point(1, 3); // point que l on recupere avec
+												// l ia ou via le mouse listener
+
+		}
 
 	}
 
