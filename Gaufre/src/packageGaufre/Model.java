@@ -89,6 +89,7 @@ public class Model {
 
 	}
 
+	
 	public boolean getCase(Point pointJouee) {
 		return tabGaufre[pointJouee.x][pointJouee.y];
 	}

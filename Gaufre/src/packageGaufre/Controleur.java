@@ -44,6 +44,7 @@ public class Controleur {
 		System.out.println("it works !!!");
 		Model model  = new Model();
 		Controleur controleur = new Controleur(model, 0);
+		
 		System.out.println("le contneu de base d une case vaut : " + donneesJeu.tabGaufre[1][1]);
 
 	}
