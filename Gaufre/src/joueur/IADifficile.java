@@ -7,10 +7,8 @@ import packageGaufre.Model;
 
 public class IADifficile extends IA{
 
-	public IADifficile (Model m , Controleur c ,int tmp){
-		this.model = m;
-		this.controleur = c;
-		this.temps = tmp;
+	public IADifficile (Controleur c ,int tmp){
+		super(c ,tmp);
 	}
 	
 	public Point jouer() {

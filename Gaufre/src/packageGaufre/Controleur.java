@@ -4,15 +4,26 @@ import java.awt.Point;
 
 import javax.print.attribute.standard.DocumentName;
 
+import joueur.*;
+
 public class Controleur {
 
-	static Model donneesJeu;
+	Model donneesJeu;
 
-	public Controleur(Model m) {
-		donneesJeu = m;
+	public Controleur(int longueur, int largeur, int nbJoueurs) {
+		Joueur[] tabJ = new Joueur[nbJoueurs];
+		tabJ[0] = new IAFacile(this,1000);
+		//tabJ[0] = new IAMoyen(this,1000);
+		tabJ[1] = new IAMoyen(this,1000);
+		System.out.println("this: " + this);
+
+		donneesJeu = new Model(longueur, largeur, tabJ);
+		
+		System.out.println("ia facile taille tableau: " + tabJ[0].controleur.getDonneesJeu().getLongueur());
+
 	}
 
-	public boolean verifiePartieFinieOuNon() {
+	public boolean partieFinie() {
 
 		boolean partieFinie;
 
@@ -29,30 +40,25 @@ public class Controleur {
 
 	}
 
-	public boolean verifieCoupValideOuNon(Point pointJouee) {
+	public boolean coupEstValide(Point pointJouee) {
 		return donneesJeu.getCase(pointJouee);
 	}
 
-	public static void jouer(Point pointJouee) {
-
-		// boucle attente pour savoir si c est l ia ou un joueur qui joue.
-
-		// recuperation d un point depuis l algorithme ou depuis le joueur avec
-		// l ecouteur d event
-		donneesJeu.manger(pointJouee);
-
+	public Model getDonneesJeu(){
+		return donneesJeu;
 	}
+
 
 	public static void main(String[] args) {
 
 		int longueur = 5;
 		int largeur = 3;
 		int nbJoueurs = 2;
-
-		Model model = new Model(longueur, largeur, nbJoueurs);
-		Controleur controleur = new Controleur(model);
-
-		System.out.println("le contneu de base d une case vaut : " + donneesJeu.tabGaufre[1][1]);
+		
+		
+		Controleur controleur = new Controleur(longueur, largeur, nbJoueurs);
+		System.out.println("main controleur: " + controleur);
+		System.out.println("le contneu de base d une case vaut : " + controleur.donneesJeu.tabGaufre[1][1]);
 
 		controleur.moteur();
 		// System.out.println("le contneu de base d une case vaut : " +
@@ -62,24 +68,22 @@ public class Controleur {
 
 	public void moteur() {
 
-		Point[] tabPoints = new Point[5];
-		tabPoints[0] = new Point(2, 1);
-		tabPoints[1] = new Point(1, 0);
-		tabPoints[2] = new Point(0, 1);
-
-		int valI = 0;
-
-		while (verifiePartieFinieOuNon() == false) {
+		while (!partieFinie()) {
 
 			afficherPlateauJeu(); // fonction personnelle de vue
 
-			Point pointJouee = tabPoints[valI]; // point que l on recupere avec
-												// l ia ou via le mouse listener
+			// Point pointJouee = tabPoints[valI]; // point que l on recupere
+			// avec
+			// l ia ou via le mouse listener
+			Joueur j = donneesJeu.getJoueur(donneesJeu.getJoueurCourant());
+			Point pointJouee;
+			do {
+				pointJouee = j.jouer();
+			} while (!coupEstValide(pointJouee));
+
+			donneesJeu.manger(pointJouee);
 			donneesJeu.joueurSuivant();
 
-			Controleur.jouer(pointJouee);
-
-			valI++;
 		}
 
 		afficherPlateauJeu();

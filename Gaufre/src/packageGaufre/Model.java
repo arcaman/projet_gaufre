@@ -1,5 +1,6 @@
 package packageGaufre;
 
+import joueur.*;
 import java.awt.Point;
 import java.util.*;
 
@@ -8,14 +9,13 @@ public class Model {
 	boolean[][] tabGaufre;
 	int longueur;
 	int largeur;
-	int nbJoueurs;
 	int joueurCourant;
-//	Joueur[] tabJoueurs;
+	Joueur[] tabJoueurs;
 
 	ArrayList<Boolean[][]> listeAnnuler;
 	ArrayList<Boolean[][]> listeRefaire;
 
-	public Model(int longueur, int largeur, int nbJoueurs) {
+	public Model(int longueur, int largeur, Joueur[] tabJ) {
 		this.tabGaufre = new boolean[longueur][largeur];
 		for (int i = 0; i < longueur; i++) {
 			for (int j = 0; j < largeur; j++) {
@@ -24,11 +24,11 @@ public class Model {
 		}
 		this.longueur = longueur;
 		this.largeur = largeur;
-		this.nbJoueurs = nbJoueurs;
 		joueurCourant = 0;
-
+		tabJoueurs = tabJ;
+		System.out.println("dans model "+this.getLongueur());
 	}
-	
+
 	public int getLargeur() {
 		return largeur;
 	}
@@ -46,7 +46,7 @@ public class Model {
 	}
 
 	public int getNbJoueurs() {
-		return nbJoueurs;
+		return tabJoueurs.length;
 	}
 
 	public boolean[][] getTabGaufre() {
@@ -56,12 +56,11 @@ public class Model {
 	public int getJoueurCourant() {
 		return joueurCourant + 1;
 	}
-	
-//	public int tabJoueurs(int indice) {
-//		return tabJoueurs[indice];
-//	}
-	
-	
+
+	public Joueur getJoueur(int indice) {
+		return tabJoueurs[indice - 1];
+	}
+
 	public void setLargeur(int largeur) {
 		this.largeur = largeur;
 	}
@@ -78,9 +77,6 @@ public class Model {
 		this.longueur = longueur;
 	}
 
-	public void setNbJoueurs(int nbJoueurs) {
-		this.nbJoueurs = nbJoueurs;
-	}
 
 	public void setTabGaufre(boolean[][] tabGaufre) {
 		this.tabGaufre = tabGaufre;
@@ -89,10 +85,14 @@ public class Model {
 	public void setJoueurCourant(int joueurCourant) {
 		this.joueurCourant = joueurCourant;
 	}
+	
+	public void setTabJoueurs(Joueur[] tabJoueurs) {
+		this.tabJoueurs = tabJoueurs;
+	}
 
 	public void joueurSuivant() {
 		this.joueurCourant = joueurCourant + 1;
-		if (joueurCourant >= nbJoueurs) {
+		if (joueurCourant >= getNbJoueurs()) {
 			this.joueurCourant = 0;
 		}
 	}
@@ -115,8 +115,6 @@ public class Model {
 
 	}
 
-	
-	
 	public boolean getCase(Point pointJouee) {
 		return tabGaufre[pointJouee.x][pointJouee.y];
 	}

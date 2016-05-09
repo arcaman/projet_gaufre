@@ -6,8 +6,7 @@ import java.awt.Point;
 
 public class Joueur {
 
-	Controleur controleur;
-	Model model;
+	public Controleur controleur;
 	int temps;
 	
 	public Point jouer(){

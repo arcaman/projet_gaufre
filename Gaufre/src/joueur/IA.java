@@ -4,6 +4,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
+import packageGaufre.Controleur;
+
 public class IA extends Joueur{
 
 	@Override
@@ -12,12 +14,27 @@ public class IA extends Joueur{
 		return null;
 	}
 
+	public IA (Controleur c ,int tmp){
+		this.controleur = c;
+		this.temps = tmp;
+	}
+	
 	public ArrayList<Point> presTraitement(){
+		System.out.println("ta mère ");
+		
 		ArrayList<Point> pointsValides = new ArrayList<Point>();
-		for(int x = 0; x < model.getTabGaufre().length; x++){
-			for(int y = 0; y < model.getTabGaufre().length; y++){
+		System.out.println("ta mère ");
+
+		System.out.println("ta mère2 " + controleur.getDonneesJeu().getLongueur());
+
+		
+		for(int x = 0; x < controleur.getDonneesJeu().getLongueur(); x++){
+			System.out.println("x="+x);;
+			for(int y = 0; y < controleur.getDonneesJeu().getLargeur(); y++){
+				System.out.println("y="+y);;
 				Point aPlacer = new Point(x, y);
-				if(controleur.verifieCoupValideOuNon(aPlacer)){
+				System.out.println(aPlacer);
+				if(controleur.coupEstValide(aPlacer)){
 					pointsValides.add(aPlacer);
 				}
 			}
