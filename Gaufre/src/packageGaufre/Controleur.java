@@ -6,7 +6,8 @@ import javax.print.attribute.standard.DocumentName;
 
 public class Controleur {
 
-	int joueurCourant;
+	static int joueurCourant = 1; // au debut on part du principe que le joueur
+									// 1 commence
 	static Model donneesJeu;
 
 	public static boolean verifiePartieFinieOuNon() {
@@ -35,14 +36,12 @@ public class Controleur {
 		}
 	}
 
-	public static void jouer() {
+	public static void jouer(Point pointJouee) {
 
 		// boucle attente pour savoir si c est l ia ou un joueur qui joue.
 
 		// recuperation d un point depuis l algorithme ou depuis le joueur avec
 		// l ecouteur d event
-
-		Point pointJouee = new Point(1, 2);
 
 		donneesJeu.manger(pointJouee);
 
@@ -63,10 +62,18 @@ public class Controleur {
 
 		while (verifiePartieFinieOuNon() == false) {
 
-			Point pointJouee = new Point(1, 3); // point que l on recupere avec
+			Point pointJouee = new Point(0, 0); // point que l on recupere avec
 												// l ia ou via le mouse listener
 
+			jouer(pointJouee);
+			joueurCourant = ((joueurCourant + 1) / 2) + 1;
+
 		}
+
+		// ici la partie est finie donc le joueur suivant a perdu. Ce joueur est
+		// incremente en fin de boucle donc c est ok
+
+		System.out.println("le joueur numero : " + joueurCourant + " a perdu");
 
 	}
 
