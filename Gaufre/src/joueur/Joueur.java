@@ -1,12 +1,17 @@
 package joueur;
 
+import packageGaufre.*;
+
 import java.awt.Point;
 
-abstract class Joueur {
+public class Joueur {
 
-	boolean[][] gaufre;
+	Controleur controleur;
+	Model model;
 	int temps;
 	
-	abstract Point jouer();
+	public Point jouer(){
+		return null;
+	}
 	
 }

@@ -1,35 +1,25 @@
 package joueur;
+import packageGaufre.*;
 
 import java.awt.Point;
 import java.util.ArrayList;
 
-public class IAFacile extends Joueur{
+public class IAFacile extends IA{
 
 	
-	public IAFacile (boolean[][] g, int tmp){
-		this.gaufre = g;
+	public IAFacile (Model m , Controleur c ,int tmp){
+		this.model = m;
+		this.controleur = c;
 		this.temps = tmp;
 	}
 	
-	Point jouer() {
-		niveauFacile();
-		return (new Point());
+	public Point jouer() {
+		return niveauFacile();
 	}
 	
-	private void niveauFacile(){
-		ArrayList<Point> pointsValides = presTraitement();
+	private Point niveauFacile(){
+		return pointAleatoire(presTraitement());
 	}
 	
-	private ArrayList<Point> presTraitement(){
-		ArrayList<Point> pointsValides = new ArrayList<Point>();
-		for(int x = 0; x < gaufre.length; x++){
-			for(int y = 0; y < gaufre.length; y++){
-				Point aPlacer = new Point(x, y);
-				//if(Controleur.estValide){
-					
-				//}
-			}
-		}
-		return pointsValides;
-	}
+
 }

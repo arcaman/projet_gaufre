@@ -3,35 +3,39 @@ package joueur;
 import java.awt.Point;
 import java.util.ArrayList;
 
-public class IAMoyen extends Joueur{
+import packageGaufre.Controleur;
+import packageGaufre.Model;
 
-	public IAMoyen (boolean[][] g, int tmp){
-		this.gaufre = g;
+public class IAMoyen extends IA{
+
+	public IAMoyen (Model m , Controleur c ,int tmp){
+		this.model = m;
+		this.controleur = c;
 		this.temps = tmp;
 	}
 	
-	Point jouer() {
-		niveauFacile();
-		return (new Point());
-			
-		
+	public Point jouer() {
+		return niveauMoyen();
 	}
 	
-	private void niveauFacile(){
-		
-	}
+	private Point niveauMoyen(){
 	
-	private ArrayList<Point> presTraitement(){
-		ArrayList<Point> pointsValides= new ArrayList<Point>();
-		for(int x = 0; x < gaufre.length; x++){
-			for(int y = 0; y < gaufre.length; y++){
-				Point aPlacer = new Point(x, y);
-				//if(Controleur.estValide){
-					
-				//}
+		Point p1 = new Point(1,0);
+		Point p2 = new Point(0,1);
+		
+		if(model.getCase(p2)){
+			if (!model.getCase(p1)){
+				return p2;
+			}	
+		}
+		
+		if(model.getCase(p1)){
+			if(!model.getCase(p2)){
+				return p1;
 			}
 		}
-		return pointsValides;
+
+		return pointAleatoire(presTraitement());
 	}
 	
 }
