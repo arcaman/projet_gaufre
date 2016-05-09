@@ -9,6 +9,12 @@ public class Controleur {
 	int joueurCourant;
 	static Model donneesJeu;
 
+	public Controleur(Model m, int j){
+		donneesJeu = m;
+		joueurCourant = j;
+		
+	}
+	
 	public boolean verifiePartieFinieOuNon() {
 
 		boolean partieFinie;
@@ -27,12 +33,7 @@ public class Controleur {
 	}
 
 	public boolean verifieCoupValideOuNon(Point pointJouee) {
-		if (donneesJeu.tabGaufre[pointJouee.x][pointJouee.y] == true) {
-			// le point n a pas ete joue
-			return true;
-		} else { // le point a ete joue precedemment
-			return false;
-		}
+		return donneesJeu.getCase(pointJouee);
 	}
 
 	public void jouer() {
@@ -41,8 +42,8 @@ public class Controleur {
 
 	public static void main(String[] args) {
 		System.out.println("it works !!!");
-
-		donneesJeu = new Model();
+		Model model  = new Model();
+		Controleur controleur = new Controleur(model, 0);
 		System.out.println("le contneu de base d une case vaut : " + donneesJeu.tabGaufre[1][1]);
 
 	}
