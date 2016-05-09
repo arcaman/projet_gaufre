@@ -14,16 +14,14 @@ public class IAFacile extends Joueur{
 	Point jouer() {
 		niveauFacile();
 		return (new Point());
-			
-		
 	}
 	
 	private void niveauFacile(){
-		
+		ArrayList<Point> pointsValides = presTraitement();
 	}
 	
 	private ArrayList<Point> presTraitement(){
-		ArrayList<Point> pointsValides= new ArrayList<Point>();
+		ArrayList<Point> pointsValides = new ArrayList<Point>();
 		for(int x = 0; x < gaufre.length; x++){
 			for(int y = 0; y < gaufre.length; y++){
 				Point aPlacer = new Point(x, y);

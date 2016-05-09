@@ -6,24 +6,30 @@ import java.util.*;
 public class Model {
 
 	boolean[][] tabGaufre;
-	static int longueur = 5;
-	static int largeur = 3;
-	static int nbJoueurs = 2;
+	int longueur;
+	int largeur;
+	int nbJoueurs;
+	int joueurCourant;
+//	Joueur[] tabJoueurs;
 
 	ArrayList<Boolean[][]> listeAnnuler;
 	ArrayList<Boolean[][]> listeRefaire;
 
-	public Model() {
+	public Model(int longueur, int largeur, int nbJoueurs) {
 		this.tabGaufre = new boolean[longueur][largeur];
 		for (int i = 0; i < longueur; i++) {
 			for (int j = 0; j < largeur; j++) {
 				this.tabGaufre[i][j] = true;
 			}
 		}
+		this.longueur = longueur;
+		this.largeur = largeur;
+		this.nbJoueurs = nbJoueurs;
+		joueurCourant = 0;
 
 	}
-
-	public static int getLargeur() {
+	
+	public int getLargeur() {
 		return largeur;
 	}
 
@@ -35,11 +41,11 @@ public class Model {
 		return listeRefaire;
 	}
 
-	public static int getLongueur() {
+	public int getLongueur() {
 		return longueur;
 	}
 
-	public static int getNbJoueurs() {
+	public int getNbJoueurs() {
 		return nbJoueurs;
 	}
 
@@ -47,8 +53,17 @@ public class Model {
 		return tabGaufre;
 	}
 
-	public static void setLargeur(int largeur) {
-		Model.largeur = largeur;
+	public int getJoueurCourant() {
+		return joueurCourant + 1;
+	}
+	
+//	public int tabJoueurs(int indice) {
+//		return tabJoueurs[indice];
+//	}
+	
+	
+	public void setLargeur(int largeur) {
+		this.largeur = largeur;
 	}
 
 	public void setListeAnnuler(ArrayList<Boolean[][]> listeAnnuler) {
@@ -59,16 +74,27 @@ public class Model {
 		this.listeRefaire = listeRefaire;
 	}
 
-	public static void setLongueur(int longueur) {
-		Model.longueur = longueur;
+	public void setLongueur(int longueur) {
+		this.longueur = longueur;
 	}
 
-	public static void setNbJoueurs(int nbJoueurs) {
-		Model.nbJoueurs = nbJoueurs;
+	public void setNbJoueurs(int nbJoueurs) {
+		this.nbJoueurs = nbJoueurs;
 	}
 
 	public void setTabGaufre(boolean[][] tabGaufre) {
 		this.tabGaufre = tabGaufre;
+	}
+
+	public void setJoueurCourant(int joueurCourant) {
+		this.joueurCourant = joueurCourant;
+	}
+
+	public void joueurSuivant() {
+		this.joueurCourant = joueurCourant + 1;
+		if (joueurCourant >= nbJoueurs) {
+			this.joueurCourant = 0;
+		}
 	}
 
 	public void manger(Point pointJouee) {
@@ -87,6 +113,12 @@ public class Model {
 
 	public void annuler() {
 
+	}
+
+	
+	
+	public boolean getCase(Point pointJouee) {
+		return tabGaufre[pointJouee.x][pointJouee.y];
 	}
 
 }
