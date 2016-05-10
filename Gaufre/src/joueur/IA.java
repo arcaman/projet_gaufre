@@ -33,7 +33,7 @@ public class IA extends Joueur{
 			for(int y = 0; y < controleur.getDonneesJeu().getLargeur(); y++){
 				//System.out.println("y="+y);;
 				Point aPlacer = new Point(x, y); //affichage du point ecrit
-				System.out.println(aPlacer);
+				//System.out.println(aPlacer);
 				if(controleur.coupEstValide(aPlacer)){
 					pointsValides.add(aPlacer);
 				}

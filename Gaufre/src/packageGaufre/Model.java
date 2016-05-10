@@ -27,6 +27,10 @@ public class Model {
 		joueurCourant = 0;
 		tabJoueurs = tabJ;
 		// System.out.println("dans model "+this.getLongueur());
+
+		this.listeAnnuler = new ArrayList<boolean[][]>();
+		this.listeRefaire = new ArrayList<boolean[][]>();
+
 	}
 
 	public int getLargeur() {
@@ -81,6 +85,14 @@ public class Model {
 		this.tabGaufre = tabGaufre;
 	}
 
+	public void setTabGaufreParValeur(boolean[][] newTabGaufre) {
+		for (int i = 0; i < this.largeur; i++) {
+			for (int j = 0; j < this.longueur; j++) {
+				this.tabGaufre[j][i] = newTabGaufre[j][i];
+			}
+		}
+	}
+
 	public void setJoueurCourant(int joueurCourant) {
 		this.joueurCourant = joueurCourant;
 	}
@@ -108,9 +120,23 @@ public class Model {
 
 	public void refaire() {
 
+		int dernierElementHistorique = this.listeRefaire.size() - 1;
+
+		if (dernierElementHistorique >= 0) {
+			setTabGaufreParValeur(this.listeRefaire.get(dernierElementHistorique));
+			this.listeAnnuler.add(this.listeRefaire.get(dernierElementHistorique));
+			this.listeRefaire.remove(dernierElementHistorique);
+		}
+
 	}
 
 	public void annuler() {
+		int dernierElementHistorique = this.listeAnnuler.size() - 1;
+		if (dernierElementHistorique >= 0) {
+			setTabGaufreParValeur(this.listeAnnuler.get(dernierElementHistorique));
+			this.listeRefaire.add(this.listeAnnuler.get(dernierElementHistorique));
+			this.listeAnnuler.remove(dernierElementHistorique);
+		}
 
 	}
 
