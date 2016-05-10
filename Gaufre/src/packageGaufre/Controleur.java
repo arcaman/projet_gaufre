@@ -110,13 +110,13 @@ public class Controleur {
 		// afficherPlateauJeuAvecParametre(donneesJeu.listeAnnuler.get(i));
 		// }
 
-//		 System.out.println("--------");
-//		 afficherPlateauJeu();
-//		 this.annuler();
-//		 this.annuler();
-//		 this.refaire();
-//		 afficherPlateauJeu();
-//		 System.out.println("--------");
+		// System.out.println("--------");
+		// afficherPlateauJeu();
+		// this.annuler();
+		// this.annuler();
+		// this.refaire();
+		// afficherPlateauJeu();
+		// System.out.println("--------");
 
 	}
 

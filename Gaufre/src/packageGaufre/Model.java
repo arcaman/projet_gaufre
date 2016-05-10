@@ -119,23 +119,32 @@ public class Model {
 	}
 
 	public void refaire() {
+		// on effectue l operation 2 fois car il faut revenir a son propre etat
+		// anterieur.
+		for (int i = 0; i < 2; i++) {
+			int dernierElementHistorique = this.listeRefaire.size() - 1;
 
-		int dernierElementHistorique = this.listeRefaire.size() - 1;
-
-		if (dernierElementHistorique >= 0) {
-			setTabGaufreParValeur(this.listeRefaire.get(dernierElementHistorique));
-			this.listeAnnuler.add(this.listeRefaire.get(dernierElementHistorique));
-			this.listeRefaire.remove(dernierElementHistorique);
+			if (dernierElementHistorique >= 0) {
+				setTabGaufreParValeur(this.listeRefaire.get(dernierElementHistorique));
+				this.listeAnnuler.add(this.listeRefaire.get(dernierElementHistorique));
+				this.listeRefaire.remove(dernierElementHistorique);
+			}
 		}
 
 	}
 
 	public void annuler() {
-		int dernierElementHistorique = this.listeAnnuler.size() - 1;
-		if (dernierElementHistorique >= 0) {
-			setTabGaufreParValeur(this.listeAnnuler.get(dernierElementHistorique));
-			this.listeRefaire.add(this.listeAnnuler.get(dernierElementHistorique));
-			this.listeAnnuler.remove(dernierElementHistorique);
+		// on effectue l operation 2 fois car il faut revenir a son propre etat
+		// anterieur. Par exemple, A joue, B joue et A rejoue. Si il annule On
+		// revient a l etat initial
+
+		for (int i = 0; i < 2; i++) {
+			int dernierElementHistorique = this.listeAnnuler.size() - 1;
+			if (dernierElementHistorique >= 0) {
+				setTabGaufreParValeur(this.listeAnnuler.get(dernierElementHistorique));
+				this.listeRefaire.add(this.listeAnnuler.get(dernierElementHistorique));
+				this.listeAnnuler.remove(dernierElementHistorique);
+			}
 		}
 
 	}
