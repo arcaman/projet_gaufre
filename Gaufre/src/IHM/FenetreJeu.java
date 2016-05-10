@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package petitprojet;
+package IHM;
 
 import java.util.HashMap;
 import javax.swing.JButton;

@@ -15,11 +15,11 @@ public class Controleur {
 		tabJ[0] = new IAFacile(this,1000);
 		//tabJ[0] = new IAMoyen(this,1000);
 		tabJ[1] = new IAMoyen(this,1000);
-		System.out.println("this: " + this);
+		//System.out.println("this: " + this);
 
 		donneesJeu = new Model(longueur, largeur, tabJ);
 		
-		System.out.println("ia facile taille tableau: " + tabJ[0].controleur.getDonneesJeu().getLongueur());
+		//System.out.println("ia facile taille tableau: " + tabJ[0].controleur.getDonneesJeu().getLongueur());
 
 	}
 
@@ -57,8 +57,8 @@ public class Controleur {
 		
 		
 		Controleur controleur = new Controleur(longueur, largeur, nbJoueurs);
-		System.out.println("main controleur: " + controleur);
-		System.out.println("le contneu de base d une case vaut : " + controleur.donneesJeu.tabGaufre[1][1]);
+		//System.out.println("main controleur: " + controleur);
+		//System.out.println("le contneu de base d une case vaut : " + controleur.donneesJeu.tabGaufre[1][1]);
 
 		controleur.moteur();
 		// System.out.println("le contneu de base d une case vaut : " +
@@ -82,6 +82,9 @@ public class Controleur {
 			} while (!coupEstValide(pointJouee));
 
 			donneesJeu.manger(pointJouee);
+			
+			//donneesJeu.listeAnnuler.add(donneesJeu.getTabGaufre());
+			
 			donneesJeu.joueurSuivant();
 
 		}

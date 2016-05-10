@@ -26,7 +26,7 @@ public class Model {
 		this.largeur = largeur;
 		joueurCourant = 0;
 		tabJoueurs = tabJ;
-		System.out.println("dans model "+this.getLongueur());
+		//System.out.println("dans model "+this.getLongueur());
 	}
 
 	public int getLargeur() {

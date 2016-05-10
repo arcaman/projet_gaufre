@@ -20,19 +20,19 @@ public class IA extends Joueur{
 	}
 	
 	public ArrayList<Point> presTraitement(){
-		System.out.println("ta mère ");
+		//System.out.println("ta mère ");
 		
 		ArrayList<Point> pointsValides = new ArrayList<Point>();
-		System.out.println("ta mère ");
+		//System.out.println("ta mère ");
 
-		System.out.println("ta mère2 " + controleur.getDonneesJeu().getLongueur());
+		//System.out.println("ta mère2 " + controleur.getDonneesJeu().getLongueur());
 
 		
 		for(int x = 0; x < controleur.getDonneesJeu().getLongueur(); x++){
-			System.out.println("x="+x);;
+			//System.out.println("x="+x);;
 			for(int y = 0; y < controleur.getDonneesJeu().getLargeur(); y++){
-				System.out.println("y="+y);;
-				Point aPlacer = new Point(x, y);
+				//System.out.println("y="+y);;
+				Point aPlacer = new Point(x, y); //affichage du point ecrit
 				System.out.println(aPlacer);
 				if(controleur.coupEstValide(aPlacer)){
 					pointsValides.add(aPlacer);
