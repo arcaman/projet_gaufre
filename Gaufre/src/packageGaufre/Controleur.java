@@ -10,17 +10,17 @@ public class Controleur {
 
 	Model donneesJeu;
 
-	public Controleur(int longueur, int largeur, int nbJoueurs) {
+	public Controleur(int lignes, int colonnes, int nbJoueurs) {
 		Joueur[] tabJ = new Joueur[nbJoueurs];
 		tabJ[0] = new IAFacile(this, 1000);
 		// tabJ[0] = new IAMoyen(this,1000);
 		tabJ[1] = new IAMoyen(this, 1000);
 		// System.out.println("this: " + this);
 
-		donneesJeu = new Model(longueur, largeur, tabJ);
+		donneesJeu = new Model(lignes, colonnes, tabJ);
 
 		// System.out.println("ia facile taille tableau: " +
-		// tabJ[0].controleur.getDonneesJeu().getLongueur());
+		// tabJ[0].controleur.getDonneesJeu().getlignes());
 
 	}
 
@@ -51,13 +51,13 @@ public class Controleur {
 
 	public boolean[][] creationTableauHistoriquePlateauJeu() {
 
-		boolean[][] tabGaufreHistorique = new boolean[donneesJeu.longueur][donneesJeu.largeur];
+		boolean[][] tabGaufreHistorique = new boolean[donneesJeu.lignes][donneesJeu.colonnes];
 
 		boolean[][] tabCourante = donneesJeu.getTabGaufre();
 
-		for (int i = 0; i < donneesJeu.largeur; i++) {
-			for (int j = 0; j < donneesJeu.longueur; j++) {
-				tabGaufreHistorique[j][i] = tabCourante[j][i];
+		for (int i = 0; i < donneesJeu.lignes; i++) {
+			for (int j = 0; j < donneesJeu.colonnes; j++) {
+				tabGaufreHistorique[i][j] = tabCourante[i][j];
 			}
 		}
 
@@ -122,12 +122,12 @@ public class Controleur {
 
 	// vue temporaire pour tests persos
 	public void afficherPlateauJeu() {
-		for (int i = 0; i < donneesJeu.largeur; i++) {
-			for (int j = 0; j < donneesJeu.longueur; j++) {
+		for (int i = 0; i < donneesJeu.lignes; i++) {
+			for (int j = 0; j < donneesJeu.colonnes; j++) {
 
 				if (i == 0 && j == 0) {
 					System.out.print("O");
-				} else if (donneesJeu.tabGaufre[j][i]) {
+				} else if (donneesJeu.tabGaufre[i][j]) {
 					System.out.print("X");
 				} else {
 					System.out.print("=");
@@ -147,12 +147,12 @@ public class Controleur {
 	}
 
 	public void afficherPlateauJeuAvecParametre(boolean[][] gaufrinette) {
-		for (int i = 0; i < donneesJeu.largeur; i++) {
-			for (int j = 0; j < donneesJeu.longueur; j++) {
+		for (int i = 0; i < donneesJeu.lignes; i++) {
+			for (int j = 0; j < donneesJeu.colonnes; j++) {
 
 				if (i == 0 && j == 0) {
 					System.out.print("O");
-				} else if (gaufrinette[j][i]) {
+				} else if (gaufrinette[i][j]) {
 					System.out.print("X");
 				} else {
 					System.out.print("=");

@@ -28,9 +28,9 @@ public class IA extends Joueur{
 		//System.out.println("ta mère2 " + controleur.getDonneesJeu().getLongueur());
 
 		
-		for(int x = 0; x < controleur.getDonneesJeu().getLongueur(); x++){
+		for(int x = 0; x < controleur.getDonneesJeu().getLignes(); x++){
 			//System.out.println("x="+x);;
-			for(int y = 0; y < controleur.getDonneesJeu().getLargeur(); y++){
+			for(int y = 0; y < controleur.getDonneesJeu().getColonnes(); y++){
 				//System.out.println("y="+y);;
 				Point aPlacer = new Point(x, y); //affichage du point ecrit
 				//System.out.println(aPlacer);

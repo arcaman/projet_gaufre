@@ -7,34 +7,34 @@ import java.util.*;
 public class Model {
 
 	boolean[][] tabGaufre;
-	int longueur;
-	int largeur;
+	int lignes;
+	int colonnes;
 	int joueurCourant;
 	Joueur[] tabJoueurs;
 
 	ArrayList<boolean[][]> listeAnnuler;
 	ArrayList<boolean[][]> listeRefaire;
 
-	public Model(int longueur, int largeur, Joueur[] tabJ) {
-		this.tabGaufre = new boolean[longueur][largeur];
-		for (int i = 0; i < longueur; i++) {
-			for (int j = 0; j < largeur; j++) {
+	public Model(int lignes, int colonnes, Joueur[] tabJ) {
+		this.tabGaufre = new boolean[lignes][colonnes];
+		for (int i = 0; i < lignes; i++) {
+			for (int j = 0; j < colonnes; j++) {
 				this.tabGaufre[i][j] = true;
 			}
 		}
-		this.longueur = longueur;
-		this.largeur = largeur;
+		this.lignes = lignes;
+		this.colonnes = colonnes;
 		joueurCourant = 0;
 		tabJoueurs = tabJ;
-		// System.out.println("dans model "+this.getLongueur());
+		// System.out.println("dans model "+this.getlignes());
 
 		this.listeAnnuler = new ArrayList<boolean[][]>();
 		this.listeRefaire = new ArrayList<boolean[][]>();
 
 	}
 
-	public int getLargeur() {
-		return largeur;
+	public int getColonnes() {
+		return colonnes;
 	}
 
 	public ArrayList<boolean[][]> getListeAnnuler() {
@@ -45,8 +45,8 @@ public class Model {
 		return listeRefaire;
 	}
 
-	public int getLongueur() {
-		return longueur;
+	public int getLignes() {
+		return lignes;
 	}
 
 	public int getNbJoueurs() {
@@ -65,8 +65,8 @@ public class Model {
 		return tabJoueurs[indice - 1];
 	}
 
-	public void setLargeur(int largeur) {
-		this.largeur = largeur;
+	public void setColonnes(int colonnes) {
+		this.colonnes = colonnes;
 	}
 
 	public void setListeAnnuler(ArrayList<boolean[][]> listeAnnuler) {
@@ -77,8 +77,8 @@ public class Model {
 		this.listeRefaire = listeRefaire;
 	}
 
-	public void setLongueur(int longueur) {
-		this.longueur = longueur;
+	public void setLignes(int lignes) {
+		this.lignes = lignes;
 	}
 
 	public void setTabGaufre(boolean[][] tabGaufre) {
@@ -86,9 +86,9 @@ public class Model {
 	}
 
 	public void setTabGaufreParValeur(boolean[][] newTabGaufre) {
-		for (int i = 0; i < this.largeur; i++) {
-			for (int j = 0; j < this.longueur; j++) {
-				this.tabGaufre[j][i] = newTabGaufre[j][i];
+		for (int i = 0; i < this.lignes; i++) {
+			for (int j = 0; j < this.colonnes; j++) {
+				this.tabGaufre[i][j] = newTabGaufre[i][j];
 			}
 		}
 	}
@@ -110,8 +110,8 @@ public class Model {
 
 	public void manger(Point pointJouee) {
 
-		for (int i = pointJouee.x; i < this.longueur; i++) {
-			for (int j = pointJouee.y; j < this.largeur; j++) {
+		for (int i = pointJouee.x; i < this.lignes; i++) {
+			for (int j = pointJouee.y; j < this.colonnes; j++) {
 				this.tabGaufre[i][j] = false;
 			}
 		}
