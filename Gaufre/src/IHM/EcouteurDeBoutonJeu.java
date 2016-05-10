@@ -8,12 +8,15 @@ package IHM;
 import Gaufre.Controleur;
 import java.awt.event.*;
 import static java.lang.System.exit;
+import javax.swing.JFrame;
 
 class EcouteurDeBoutonJeu implements ActionListener {
-    Controleur c;
+    private Controleur c;
+    private JFrame frames[];
     
-    public EcouteurDeBoutonJeu(Controleur c) {
+    public EcouteurDeBoutonJeu(Controleur c,JFrame[] frames) {
         this.c=c;
+        this.frames=frames;
     }
 
     public void actionPerformed(ActionEvent e) {

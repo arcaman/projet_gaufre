@@ -18,7 +18,7 @@ class EcouteurDeSouris implements MouseListener {
     public void mouseExited(MouseEvent e) {}
     
     public void mouseClicked(MouseEvent e) {
-        g.traiterClic(e.getPoint());
+        g.manger(e.getPoint());
         g.repaint();
     }
     

@@ -10,16 +10,15 @@ import java.awt.event.*;
 import static java.lang.System.exit;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
+import javax.swing.JFrame;
 
 class EcouteurDeBoutonMenu implements ActionListener {
-    Controleur c;
-    private ButtonGroup gr1;
-    private ButtonGroup gr2;
+    private Controleur c;
+    private JFrame frames[];
     
-    public EcouteurDeBoutonMenu(Controleur c, ButtonGroup gr1, ButtonGroup gr2) {
+    public EcouteurDeBoutonMenu(Controleur c, JFrame[] frames) {
         this.c=c;
-        this.gr1=gr1;
-        this.gr2=gr2;
+        this.frames=frames;
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -39,8 +38,10 @@ class EcouteurDeBoutonMenu implements ActionListener {
     }
 
     private void valider() {
-        ButtonModel nbjoueur = gr1.getSelection();
+        //ButtonModel nbjoueur = gr1.getSelection();
         //c.valider();
+        frames[0].setVisible(false);
+        frames[1].setVisible(true);
     }
 
     private void charger() {

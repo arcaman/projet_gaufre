@@ -14,32 +14,61 @@ import java.util.HashMap;
 import javax.swing.*;
 import Gaufre.*;
 
-public class FenetreJeu implements Runnable {
+public class FenetreJeu extends JFrame {
 
     private JPanel[] conteneurs;
-    private JFrame f;
+    private JFrame[] frames;
     private JLabel nbcoups;
     private HashMap<String, JButton> boutons;
     private Controleur c;
     private EcouteurDeBoutonJeu e;
 
-    public FenetreJeu(Controleur c) {
+    public JPanel[] getConteneurs() {
+        return conteneurs;
+    }
+
+    public void setConteneurs(JPanel[] conteneurs) {
+        this.conteneurs = conteneurs;
+    }
+
+    public JLabel getNbcoups() {
+        return nbcoups;
+    }
+
+    public void setNbcoups(JLabel nbcoups) {
+        this.nbcoups = nbcoups;
+    }
+
+    public HashMap<String, JButton> getBoutons() {
+        return boutons;
+    }
+
+    public void setBoutons(HashMap<String, JButton> boutons) {
+        this.boutons = boutons;
+    }
+
+    public Gaufre.Controleur getC() {
+        return c;
+    }
+
+    public void setC(Gaufre.Controleur c) {
         this.c = c;
     }
 
-    public void run() {
-        // Creation d'une fenetre
-        f = new JFrame("Gaufre");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setLocationRelativeTo(null);
-        f.setResizable(true);
-        f.setSize(1366, 768);
-        f.setVisible(true);
+    public EcouteurDeBoutonJeu getE() {
+        return e;
+    }
 
-        //Conteneur des différents composants
+    public void setE(EcouteurDeBoutonJeu e) {
+        this.e = e;
+    }
+    
+    public FenetreJeu(Controleur c, JFrame[] frames) {
+        this.frames=frames;
+        this.c = c;
         conteneurs = new JPanel[2];
         boutons = new HashMap();
-        e = new EcouteurDeBoutonJeu(c);
+        e = new EcouteurDeBoutonJeu(c,frames);
         String[] nomboutons = {"Nouveau", "Sauvegarder", "Charger", "Quitter", "Annuler", "Refaire", "Aide"};
         conteneurs[0] = new JPanel();
         conteneurs[1] = new JPanel();
@@ -55,13 +84,15 @@ public class FenetreJeu implements Runnable {
             boutons.get(nomboutons[i]).setActionCommand(nomboutons[i]);
             boutons.get(nomboutons[i]).addActionListener(e);
         }
+        
+        
 
         Grille grille = new Grille(c.getDonneesJeu().getTabGaufre());
         grille.addMouseListener(new EcouteurDeSouris(grille));
 
-        f.add(conteneurs[0], BorderLayout.NORTH);
-        f.add(grille, BorderLayout.CENTER);
-        f.add(conteneurs[1], BorderLayout.SOUTH);
+        add(conteneurs[0], BorderLayout.NORTH);
+        add(grille, BorderLayout.CENTER);
+        add(conteneurs[1], BorderLayout.SOUTH);
     }
 
     public HashMap<String, JButton> getButtons() {

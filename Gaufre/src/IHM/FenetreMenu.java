@@ -22,29 +22,89 @@ import javax.swing.JRadioButton;
  *
  * @author Adrien
  */
-public class FenetreMenu implements Runnable {
-    private JFrame f;
+public class FenetreMenu extends JFrame {
     private JPanel conteneurs[];
+    private JFrame frames[];
     private ButtonGroup gr1;
     private ButtonGroup gr2;
-    private JRadioButton[] bmode;
-    private JRadioButton[] bdiff;
+    private JRadioButton[] j1;
+    private JRadioButton[] j2;
     private HashMap<String,JButton> boutons;
     private Controleur c;
     EcouteurDeBoutonMenu e;
+    
+    public JPanel[] getConteneurs() {
+        return conteneurs;
+    }
 
-    public void run() {
-        f = new JFrame("Menu Principal");
+    public void setConteneurs(JPanel[] conteneurs) {
+        this.conteneurs = conteneurs;
+    }
+
+    public ButtonGroup getGr1() {
+        return gr1;
+    }
+
+    public void setGr1(ButtonGroup gr1) {
+        this.gr1 = gr1;
+    }
+
+    public ButtonGroup getGr2() {
+        return gr2;
+    }
+
+    public void setGr2(ButtonGroup gr2) {
+        this.gr2 = gr2;
+    }
+
+    public JRadioButton[] getBmode() {
+        return j1;
+    }
+
+    public void setBmode(JRadioButton[] bmode) {
+        this.j1 = bmode;
+    }
+
+    public JRadioButton[] getBdiff() {
+        return j2;
+    }
+
+    public void setBdiff(JRadioButton[] bdiff) {
+        this.j2 = bdiff;
+    }
+
+    public HashMap<String, JButton> getBoutons() {
+        return boutons;
+    }
+
+    public void setBoutons(HashMap<String, JButton> boutons) {
+        this.boutons = boutons;
+    }
+
+    public Controleur getC() {
+        return c;
+    }
+
+    public void setC(Controleur c) {
+        this.c = c;
+    }
+
+    public EcouteurDeBoutonMenu getE() {
+        return e;
+    }
+
+    public void setE(EcouteurDeBoutonMenu e) {
+        this.e = e;
+    }
+    
+    public FenetreMenu(Controleur c, JFrame[] frames) {
+        this.frames=frames;
         boutons = new HashMap();
         gr1 = new ButtonGroup();
         gr2 = new ButtonGroup();
-        e = new EcouteurDeBoutonMenu(c,gr1,gr2);
+        e = new EcouteurDeBoutonMenu(c,frames);
         //Fenetre de base
-        f.setSize(640, 300);
-        f.setResizable(true);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setLocationRelativeTo(null);
-        f.setVisible(true);
+        this.c = c;
 
         //Creation panels
         conteneurs = new JPanel[5];
@@ -57,27 +117,25 @@ public class FenetreMenu implements Runnable {
         l1.setFont(new Font("Arial", Font.BOLD, 20));
         
         //Conteneur 3
-        JLabel l2 = new JLabel("Selectionner type de partie :");
+        JLabel l2 = new JLabel("Joueur 1 :");
         l2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        //RadioGroup des boutons mode de jeu
-        String[] modes = {"Solo", "Deux Joueurs"};
-        bmode = new JRadioButton[2];
-        for (int i = 0; i < bmode.length; i++) {
-            bmode[i] = new JRadioButton(modes[i]);
-            gr1.add(bmode[i]);
+        String[] modes = {"Humain", "Facile", "Moyen", "Difficile"};
+        j1 = new JRadioButton[4];
+        for (int i = 0; i < j1.length; i++) {
+            j1[i] = new JRadioButton(modes[i]);
+            gr1.add(j1[i]);
         }
-        bmode[0].setSelected(true);
+        j1[0].setSelected(true);
 
         //Conteneur 4
-        JLabel l3 = new JLabel("Difficulté de la partie (si jeu solo) :");
-        //RadioGroup de la difficulté de l'IA
-        String[] difficultées = {"Facile", "Moyen", "Difficile", "Hardcore"};
-        bdiff = new JRadioButton[4];
+        JLabel l3 = new JLabel("Joueur 2 :");
+        String[] difficultées = {"Humain", "Facile", "Moyen", "Difficile"};
+        j2 = new JRadioButton[4];
         for (int i = 0; i < difficultées.length; i++) {
-            bdiff[i] = new JRadioButton(difficultées[i]);            
-            gr2.add(bdiff[i]);
+            j2[i] = new JRadioButton(difficultées[i]);            
+            gr2.add(j2[i]);
         }
-        bdiff[0].setSelected(true);
+        j2[0].setSelected(true);
         //Conteneur 2
         String[] nomboutons = {"Valider","Charger","Quitter"};
         for (int i=0; i<nomboutons.length;i++) {
@@ -95,15 +153,15 @@ public class FenetreMenu implements Runnable {
         conteneurs[1].setLayout(new GridLayout(1,2));
         conteneurs[3].setLayout(new BoxLayout(conteneurs[3], BoxLayout.PAGE_AXIS));
         conteneurs[3].add(l2);
-        for (int i = 0; i < bmode.length; i++) {
-            bmode[i].setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            conteneurs[3].add(bmode[i]);
+        for (int i = 0; i < j1.length; i++) {
+            j1[i].setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            conteneurs[3].add(j1[i]);
         }
         conteneurs[4].setLayout(new BoxLayout(conteneurs[4], BoxLayout.PAGE_AXIS));
         conteneurs[4].add(l3);
-        for (int i = 0; i < bdiff.length; i++) {
-            bdiff[i].setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            conteneurs[4].add(bdiff[i]);
+        for (int i = 0; i < j2.length; i++) {
+            j2[i].setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            conteneurs[4].add(j2[i]);
         }
         conteneurs[4].setLayout(new BoxLayout(conteneurs[4], BoxLayout.PAGE_AXIS));
         for (int i=0; i<nomboutons.length;i++) {
@@ -111,9 +169,9 @@ public class FenetreMenu implements Runnable {
         }
         conteneurs[1].add(conteneurs[3], BorderLayout.CENTER);
         conteneurs[1].add(conteneurs[4], BorderLayout.CENTER);
-        f.add(conteneurs[0], BorderLayout.NORTH);
-        f.add(conteneurs[1], BorderLayout.CENTER);
-        f.add(conteneurs[2], BorderLayout.SOUTH);
+        add(conteneurs[0], BorderLayout.NORTH);
+        add(conteneurs[1], BorderLayout.CENTER);
+        add(conteneurs[2], BorderLayout.SOUTH);
     }
     
     public HashMap<String,JButton> getButtons() {
