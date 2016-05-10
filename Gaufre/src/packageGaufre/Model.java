@@ -12,8 +12,8 @@ public class Model {
 	int joueurCourant;
 	Joueur[] tabJoueurs;
 
-	ArrayList<Boolean[][]> listeAnnuler;
-	ArrayList<Boolean[][]> listeRefaire;
+	ArrayList<boolean[][]> listeAnnuler;
+	ArrayList<boolean[][]> listeRefaire;
 
 	public Model(int longueur, int largeur, Joueur[] tabJ) {
 		this.tabGaufre = new boolean[longueur][largeur];
@@ -26,18 +26,18 @@ public class Model {
 		this.largeur = largeur;
 		joueurCourant = 0;
 		tabJoueurs = tabJ;
-		//System.out.println("dans model "+this.getLongueur());
+		// System.out.println("dans model "+this.getLongueur());
 	}
 
 	public int getLargeur() {
 		return largeur;
 	}
 
-	public ArrayList<Boolean[][]> getListeAnnuler() {
+	public ArrayList<boolean[][]> getListeAnnuler() {
 		return listeAnnuler;
 	}
 
-	public ArrayList<Boolean[][]> getListeRefaire() {
+	public ArrayList<boolean[][]> getListeRefaire() {
 		return listeRefaire;
 	}
 
@@ -65,18 +65,17 @@ public class Model {
 		this.largeur = largeur;
 	}
 
-	public void setListeAnnuler(ArrayList<Boolean[][]> listeAnnuler) {
+	public void setListeAnnuler(ArrayList<boolean[][]> listeAnnuler) {
 		this.listeAnnuler = listeAnnuler;
 	}
 
-	public void setListeRefaire(ArrayList<Boolean[][]> listeRefaire) {
+	public void setListeRefaire(ArrayList<boolean[][]> listeRefaire) {
 		this.listeRefaire = listeRefaire;
 	}
 
 	public void setLongueur(int longueur) {
 		this.longueur = longueur;
 	}
-
 
 	public void setTabGaufre(boolean[][] tabGaufre) {
 		this.tabGaufre = tabGaufre;
@@ -85,7 +84,7 @@ public class Model {
 	public void setJoueurCourant(int joueurCourant) {
 		this.joueurCourant = joueurCourant;
 	}
-	
+
 	public void setTabJoueurs(Joueur[] tabJoueurs) {
 		this.tabJoueurs = tabJoueurs;
 	}
