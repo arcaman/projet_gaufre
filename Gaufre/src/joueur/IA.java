@@ -8,38 +8,16 @@ import packageGaufre.Controleur;
 
 public class IA extends Joueur{
 
-	@Override
-	public Point jouer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public IA (Controleur c ,int tmp){
 		this.controleur = c;
 		this.temps = tmp;
 	}
 	
-	public ArrayList<Point> presTraitement(){
-		System.out.println("ta mère ");
-		
-		ArrayList<Point> pointsValides = new ArrayList<Point>();
-		System.out.println("ta mère ");
-
-		System.out.println("ta mère2 " + controleur.getDonneesJeu().getLongueur());
-
-		
-		for(int x = 0; x < controleur.getDonneesJeu().getLongueur(); x++){
-			System.out.println("x="+x);;
-			for(int y = 0; y < controleur.getDonneesJeu().getLargeur(); y++){
-				System.out.println("y="+y);;
-				Point aPlacer = new Point(x, y);
-				System.out.println(aPlacer);
-				if(controleur.coupEstValide(aPlacer)){
-					pointsValides.add(aPlacer);
-				}
-			}
-		}
-		return pointsValides;
+	@Override
+	public Point jouer() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	public Point pointAleatoire(ArrayList<Point> pointsValides){
@@ -49,4 +27,12 @@ public class IA extends Joueur{
 		return pointsValides.get(indiceResultat);
 	}
 	
+	
+	public boolean[][] listeVersTableau (boolean[] listeHautDroite){
+		return null;
+	}
+	
+	public boolean[] tableauVersListe (boolean[][] t){
+		return null;
+	}
 }

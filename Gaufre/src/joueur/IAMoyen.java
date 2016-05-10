@@ -1,6 +1,7 @@
 package joueur;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 import packageGaufre.Controleur;
 import packageGaufre.Model;
@@ -23,7 +24,7 @@ public class IAMoyen extends IA{
 		if(controleur.getDonneesJeu().getCase(p2)){
 			if (!controleur.getDonneesJeu().getCase(p1)){
 				return p2;
-			}	
+			}
 		}
 		
 		if(controleur.getDonneesJeu().getCase(p1)){
@@ -32,7 +33,34 @@ public class IAMoyen extends IA{
 			}
 		}
 
-		return pointAleatoire(presTraitement());
+		//recuperer points valides sauf p1 p2
+		ArrayList<Point> pointsValides= presTraitement();
+		
+		//si la list est vide
+		if(pointsValides.size() == 0){
+			return p1;
+		}
+		
+		
+		//sinon renvoie un point aléatoire
+		
+		return pointAleatoire(pointsValides);
+	}
+	
+	private ArrayList<Point> presTraitement(){
+		
+		ArrayList<Point> pointsValides = new ArrayList<Point>();		
+		for(int x = 0; x < controleur.getDonneesJeu().getLongueur(); x++){
+			for(int y = 0; y < controleur.getDonneesJeu().getLargeur(); y++){
+				if(!(((x==1)&&(y==0)) || ((x==0)&&(y==1)))){
+					Point aPlacer = new Point(x, y);
+					if(controleur.coupEstValide(aPlacer)){
+						pointsValides.add(aPlacer);
+					}
+				}
+			}
+		}
+		return pointsValides;
 	}
 	
 }

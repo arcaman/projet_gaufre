@@ -13,4 +13,12 @@ public class Joueur {
 		return null;
 	}
 	
+	public boolean[][] listeVersTableau (boolean[] listeHautDroite){
+		return null;
+	}
+
+	public boolean[] tableauVersListe (boolean[][] t){
+		return null;
+	}
+
 }
