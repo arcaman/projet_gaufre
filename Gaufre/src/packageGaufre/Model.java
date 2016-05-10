@@ -4,45 +4,49 @@ import joueur.*;
 import java.awt.Point;
 import java.util.*;
 
-public class Model {
+public class Model implements java.io.Serializable {
 
 	boolean[][] tabGaufre;
-	int longueur;
-	int largeur;
+	int lignes;
+	int colonnes;
 	int joueurCourant;
 	Joueur[] tabJoueurs;
 
-	ArrayList<Boolean[][]> listeAnnuler;
-	ArrayList<Boolean[][]> listeRefaire;
+	ArrayList<boolean[][]> listeAnnuler;
+	ArrayList<boolean[][]> listeRefaire;
 
-	public Model(int longueur, int largeur, Joueur[] tabJ) {
-		this.tabGaufre = new boolean[longueur][largeur];
-		for (int i = 0; i < longueur; i++) {
-			for (int j = 0; j < largeur; j++) {
+	public Model(int lignes, int colonnes, Joueur[] tabJ) {
+		this.tabGaufre = new boolean[lignes][colonnes];
+		for (int i = 0; i < lignes; i++) {
+			for (int j = 0; j < colonnes; j++) {
 				this.tabGaufre[i][j] = true;
 			}
 		}
-		this.longueur = longueur;
-		this.largeur = largeur;
+		this.lignes = lignes;
+		this.colonnes = colonnes;
 		joueurCourant = 0;
 		tabJoueurs = tabJ;
-		System.out.println("dans model "+this.getLongueur());
+		// System.out.println("dans model "+this.getlignes());
+
+		this.listeAnnuler = new ArrayList<boolean[][]>();
+		this.listeRefaire = new ArrayList<boolean[][]>();
+
 	}
 
-	public int getLargeur() {
-		return largeur;
+	public int getColonnes() {
+		return colonnes;
 	}
 
-	public ArrayList<Boolean[][]> getListeAnnuler() {
+	public ArrayList<boolean[][]> getListeAnnuler() {
 		return listeAnnuler;
 	}
 
-	public ArrayList<Boolean[][]> getListeRefaire() {
+	public ArrayList<boolean[][]> getListeRefaire() {
 		return listeRefaire;
 	}
 
-	public int getLongueur() {
-		return longueur;
+	public int getLignes() {
+		return lignes;
 	}
 
 	public int getNbJoueurs() {
@@ -61,31 +65,38 @@ public class Model {
 		return tabJoueurs[indice - 1];
 	}
 
-	public void setLargeur(int largeur) {
-		this.largeur = largeur;
+	public void setColonnes(int colonnes) {
+		this.colonnes = colonnes;
 	}
 
-	public void setListeAnnuler(ArrayList<Boolean[][]> listeAnnuler) {
+	public void setListeAnnuler(ArrayList<boolean[][]> listeAnnuler) {
 		this.listeAnnuler = listeAnnuler;
 	}
 
-	public void setListeRefaire(ArrayList<Boolean[][]> listeRefaire) {
+	public void setListeRefaire(ArrayList<boolean[][]> listeRefaire) {
 		this.listeRefaire = listeRefaire;
 	}
 
-	public void setLongueur(int longueur) {
-		this.longueur = longueur;
+	public void setLignes(int lignes) {
+		this.lignes = lignes;
 	}
-
 
 	public void setTabGaufre(boolean[][] tabGaufre) {
 		this.tabGaufre = tabGaufre;
 	}
 
+	public void setTabGaufreParValeur(boolean[][] newTabGaufre) {
+		for (int i = 0; i < this.lignes; i++) {
+			for (int j = 0; j < this.colonnes; j++) {
+				this.tabGaufre[i][j] = newTabGaufre[i][j];
+			}
+		}
+	}
+
 	public void setJoueurCourant(int joueurCourant) {
 		this.joueurCourant = joueurCourant;
 	}
-	
+
 	public void setTabJoueurs(Joueur[] tabJoueurs) {
 		this.tabJoueurs = tabJoueurs;
 	}
@@ -99,8 +110,8 @@ public class Model {
 
 	public void manger(Point pointJouee) {
 
-		for (int i = pointJouee.x; i < this.longueur; i++) {
-			for (int j = pointJouee.y; j < this.largeur; j++) {
+		for (int i = pointJouee.x; i < this.lignes; i++) {
+			for (int j = pointJouee.y; j < this.colonnes; j++) {
 				this.tabGaufre[i][j] = false;
 			}
 		}
@@ -108,10 +119,33 @@ public class Model {
 	}
 
 	public void refaire() {
+		// on effectue l operation 2 fois car il faut revenir a son propre etat
+		// anterieur.
+		for (int i = 0; i < 2; i++) {
+			int dernierElementHistorique = this.listeRefaire.size() - 1;
+
+			if (dernierElementHistorique >= 0) {
+				setTabGaufreParValeur(this.listeRefaire.get(dernierElementHistorique));
+				this.listeAnnuler.add(this.listeRefaire.get(dernierElementHistorique));
+				this.listeRefaire.remove(dernierElementHistorique);
+			}
+		}
 
 	}
 
 	public void annuler() {
+		// on effectue l operation 2 fois car il faut revenir a son propre etat
+		// anterieur. Par exemple, A joue, B joue et A rejoue. Si il annule On
+		// revient a l etat initial
+
+		for (int i = 0; i < 2; i++) {
+			int dernierElementHistorique = this.listeAnnuler.size() - 1;
+			if (dernierElementHistorique >= 0) {
+				setTabGaufreParValeur(this.listeAnnuler.get(dernierElementHistorique));
+				this.listeRefaire.add(this.listeAnnuler.get(dernierElementHistorique));
+				this.listeAnnuler.remove(dernierElementHistorique);
+			}
+		}
 
 	}
 
