@@ -1,12 +1,13 @@
 package packageGaufre;
 
 import java.awt.Point;
+import java.io.*;
 
 import javax.print.attribute.standard.DocumentName;
 
 import joueur.*;
 
-public class Controleur {
+public class Controleur implements java.io.Serializable {
 
 	Model donneesJeu;
 
@@ -166,9 +167,51 @@ public class Controleur {
 		System.out.println();
 		System.out.println();
 		System.out.println();
-		System.out.println();
-		System.out.println();
 
+	}
+
+	public void sauvegarder() {
+
+		ObjectOutputStream oos = null;
+
+		try {
+			final FileOutputStream fichier = new FileOutputStream("donneesJeu.ser");
+			oos = new ObjectOutputStream(fichier);
+			oos.writeObject(donneesJeu);
+			oos.flush();
+		} catch (final java.io.IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (oos != null) {
+					oos.flush();
+					oos.close();
+				}
+			} catch (final IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+
+	public void charger() {
+		ObjectInputStream ois = null;
+		try {
+			final FileInputStream fichierIn = new FileInputStream("donneesJeu.ser");
+			ois = new ObjectInputStream(fichierIn);
+			donneesJeu = (Model) ois.readObject();
+		} catch (final java.io.IOException e) {
+			e.printStackTrace();
+		} catch (final ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ois != null) {
+					ois.close();
+				}
+			} catch (final IOException ex) {
+				ex.printStackTrace();
+			}
+		}
 	}
 
 }

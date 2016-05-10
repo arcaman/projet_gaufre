@@ -4,7 +4,7 @@ import joueur.*;
 import java.awt.Point;
 import java.util.*;
 
-public class Model {
+public class Model implements java.io.Serializable {
 
 	boolean[][] tabGaufre;
 	int lignes;

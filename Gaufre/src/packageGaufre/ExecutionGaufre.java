@@ -9,13 +9,10 @@ public class ExecutionGaufre {
 		int nbJoueurs = 2;
 
 		Controleur controleur = new Controleur(lignes, colonnes, nbJoueurs);
-		// System.out.println("main controleur: " + controleur);
-		// System.out.println("le contneu de base d une case vaut : " +
-		// controleur.donneesJeu.tabGaufre[1][1]);
 
+		//controleur.charger();
 		controleur.moteur();
-		// System.out.println("le contneu de base d une case vaut : " +
-		// donneesJeu.tabGaufre[1][1]);
+		//controleur.sauvegarder();
 
 	}
 
