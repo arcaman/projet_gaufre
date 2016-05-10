@@ -50,8 +50,8 @@ public class IAMoyen extends IA{
 	private ArrayList<Point> presTraitement(){
 		
 		ArrayList<Point> pointsValides = new ArrayList<Point>();		
-		for(int x = 0; x < controleur.getDonneesJeu().getLongueur(); x++){
-			for(int y = 0; y < controleur.getDonneesJeu().getLargeur(); y++){
+		for(int x = 0; x < controleur.getDonneesJeu().getLignes(); x++){
+			for(int y = 0; y < controleur.getDonneesJeu().getColonnes(); y++){
 				if(!(((x==1)&&(y==0)) || ((x==0)&&(y==1)))){
 					Point aPlacer = new Point(x, y);
 					if(controleur.coupEstValide(aPlacer)){

@@ -22,7 +22,7 @@ public class IADifficileTest {
 		largeur = 4;
 		int nbJoueurs = 2;
 		controleur = new Controleur(longueur, largeur, nbJoueurs);
-		jDifficile = controleur.getDonneesJeu().getTabJoueur()[1];
+		jDifficile = new IADifficile(controleur,1000);
 	}
 	
 	@Test
@@ -52,10 +52,8 @@ public class IADifficileTest {
 		verif[1][1] = true ;
 		verif[2][0] = true ;
 
-		afficherPlateauJeu(verif);
 		
 		boolean[][] test = jDifficile.listeVersTableau(listeTest);
-		afficherPlateauJeu(test);
 		
 		for(int i=0;i<longueur;i++)
 			for(int j=0;j < largeur;j++)
@@ -69,26 +67,7 @@ public class IADifficileTest {
 		
 	}
 	
-	public void afficherPlateauJeu(boolean[][] PJ) {
-		
-		System.out.println("laaaaaa");
-		for (int i = 0; i < PJ[i].length; i++) {
-			for (int j = 0; j < PJ.length; j++) {
 
-				if (i == 0 && j == 0) {
-					System.out.print("O");
-				} else if (PJ[j][i]) {
-					System.out.print("X");
-				} else {
-					System.out.print("=");
-				}
-
-			}
-			System.out.println();
-		}
-		System.out.println("plus laaaaaa");
-		
-	}
 
 
 }
