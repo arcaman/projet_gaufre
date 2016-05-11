@@ -27,14 +27,14 @@ class EcouteurDeSouris implements MouseListener {
 
 	public void mouseClicked(MouseEvent e) {
 
-		int x = e.getPoint().x * c.getDonneesJeu().getColonnes() / g.getSize().width;
-		int y = e.getPoint().y * c.getDonneesJeu().getLignes() / g.getSize().height;
+		int y = e.getPoint().x * c.getDonneesJeu().getColonnes() / g.getSize().width;
+		int x = e.getPoint().y * c.getDonneesJeu().getLignes() / g.getSize().height;
 //		int x = g.getSize().width / e.getPoint().x ;
 //		int y = e.getPoint().y * c.getDonneesJeu().getLignes() / g.getSize().height;
 
 		Point p = new Point(x, y);
 
-		c.moteur();
+		c.moteur(p);
 
 		g.repaint();
 	}

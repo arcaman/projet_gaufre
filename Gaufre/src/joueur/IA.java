@@ -15,7 +15,7 @@ public class IA extends Joueur{
 	}
 	
 	@Override
-	public Point jouer() {
+	public Point jouer(Point p) {
 		// TODO Auto-generated method stub
 		return null;
 	}

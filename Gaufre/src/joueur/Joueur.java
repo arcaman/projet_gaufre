@@ -9,7 +9,7 @@ public class Joueur implements java.io.Serializable {
 	public Controleur controleur;
 	int temps;
 	
-	public Point jouer(){
+	public Point jouer(Point p){
 		return null;
 	}
 	

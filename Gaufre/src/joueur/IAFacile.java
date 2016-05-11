@@ -11,7 +11,7 @@ public class IAFacile extends IA{
 		super(c ,tmp);
 	}
 	
-	public Point jouer() {
+	public Point jouer(Point p) {
 		return niveauFacile();
 	}
 	

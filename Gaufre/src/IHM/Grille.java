@@ -86,7 +86,7 @@ class Grille extends JComponent {
         // On affiche les cases mangées
         for (int i=0; i<ligne; i++) {
             for (int j=0; j<colonne; j++) {
-                if (b[i][j] != true) {
+                if (c.getDonneesJeu().getTabGaufre()[i][j] != true) {
                     afficherCroix(j,i,drawable);
                 }
             }

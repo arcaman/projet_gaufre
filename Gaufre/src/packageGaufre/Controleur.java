@@ -15,7 +15,7 @@ public class Controleur implements java.io.Serializable {
 		Joueur[] tabJ = new Joueur[nbJoueurs];
 		tabJ[0] = new IAFacile(this, 1000);
 		// tabJ[0] = new IAMoyen(this,1000);
-		tabJ[1] = new IAMoyen(this, 1000);
+		tabJ[1] = new Humain();
 		// System.out.println("this: " + this);
 
 		donneesJeu = new Model(lignes, colonnes, tabJ);
@@ -58,7 +58,7 @@ public class Controleur implements java.io.Serializable {
 		donneesJeu.refaire();
 	}
 
-	public void moteur() {
+	public void moteur(Point p) {
 
 		afficherPlateauJeu(); // fonction personnelle de vue
 
@@ -68,11 +68,11 @@ public class Controleur implements java.io.Serializable {
 		Point pointJouee;
 		// do {
 		// pointJouee = j.jouer();
-		// System.out.println("joueur " + donneesJeu.getJoueurCourant() + "veut
-		// jouer" + pointJouee);
+
 		// } while (!coupEstValide(pointJouee));
 
-		pointJouee = j.jouer();
+		pointJouee = j.jouer(p);
+		System.out.println("joueur " + donneesJeu.getJoueurCourant() + "veut jouer" + pointJouee);
 
 		if (coupEstValide(pointJouee)) {
 			donneesJeu.manger(pointJouee);
