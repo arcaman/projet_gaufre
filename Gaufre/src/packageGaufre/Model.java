@@ -26,10 +26,13 @@ public class Model implements java.io.Serializable {
 		this.colonnes = colonnes;
 		joueurCourant = 0;
 		tabJoueurs = tabJ;
+		
 		// System.out.println("dans model "+this.getlignes());
 
 		this.listeAnnuler = new ArrayList<boolean[][]>();
 		this.listeRefaire = new ArrayList<boolean[][]>();
+		
+		this.listeAnnuler.add(creationTableauHistoriquePlateauJeu());
 
 	}
 
@@ -146,6 +149,22 @@ public class Model implements java.io.Serializable {
 				this.listeAnnuler.remove(dernierElementHistorique);
 			}
 		}
+
+	}
+	
+	public boolean[][] creationTableauHistoriquePlateauJeu() {
+
+		boolean[][] tabGaufreHistorique = new boolean[lignes][colonnes];
+
+		boolean[][] tabCourante = this.getTabGaufre();
+
+		for (int i = 0; i < lignes; i++) {
+			for (int j = 0; j < colonnes; j++) {
+				tabGaufreHistorique[i][j] = tabCourante[i][j];
+			}
+		}
+
+		return tabGaufreHistorique;
 
 	}
 

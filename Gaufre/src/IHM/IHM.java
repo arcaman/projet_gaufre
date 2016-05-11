@@ -5,7 +5,7 @@
  */
 package IHM;
 
-import Gaufre.*;
+import packageGaufre.*;
 import java.awt.*;
 import javax.swing.*;
 
@@ -19,7 +19,7 @@ public class IHM implements Runnable{
 	int colonnes = 5;
 	int nbJoueurs = 2;
 
-        Controleur c = new Controleur(lignes, colonnes);
+        Controleur c = new Controleur(lignes, colonnes, nbJoueurs);
         
         JFrame[] frames = new JFrame[2];
         frames[0] = new FenetreMenu(c,frames);

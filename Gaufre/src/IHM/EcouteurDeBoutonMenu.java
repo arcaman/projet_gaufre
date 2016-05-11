@@ -5,7 +5,7 @@
  */
 package IHM;
 
-import Gaufre.Controleur;
+import packageGaufre.Controleur;
 import java.awt.event.*;
 import static java.lang.System.exit;
 import javax.swing.ButtonGroup;

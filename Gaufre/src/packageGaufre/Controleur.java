@@ -50,22 +50,6 @@ public class Controleur implements java.io.Serializable {
 		return donneesJeu;
 	}
 
-	public boolean[][] creationTableauHistoriquePlateauJeu() {
-
-		boolean[][] tabGaufreHistorique = new boolean[donneesJeu.lignes][donneesJeu.colonnes];
-
-		boolean[][] tabCourante = donneesJeu.getTabGaufre();
-
-		for (int i = 0; i < donneesJeu.lignes; i++) {
-			for (int j = 0; j < donneesJeu.colonnes; j++) {
-				tabGaufreHistorique[i][j] = tabCourante[i][j];
-			}
-		}
-
-		return tabGaufreHistorique;
-
-	}
-
 	public void annuler() {
 		donneesJeu.annuler();
 	}
@@ -78,31 +62,38 @@ public class Controleur implements java.io.Serializable {
 
 		afficherPlateauJeu(); // fonction personnelle de vue
 
-		while (!partieFinie()) {
+		// while (!partieFinie()) {
 
-			donneesJeu.listeAnnuler.add(creationTableauHistoriquePlateauJeu());
+		Joueur j = donneesJeu.getJoueur(donneesJeu.getJoueurCourant());
+		Point pointJouee;
+		// do {
+		// pointJouee = j.jouer();
+		// System.out.println("joueur " + donneesJeu.getJoueurCourant() + "veut
+		// jouer" + pointJouee);
+		// } while (!coupEstValide(pointJouee));
 
-			Joueur j = donneesJeu.getJoueur(donneesJeu.getJoueurCourant());
-			Point pointJouee;
-			do {
-				pointJouee = j.jouer();
-				System.out.println("joueur " + donneesJeu.getJoueurCourant() + "veut jouer" + pointJouee);
-			} while (!coupEstValide(pointJouee));
+		pointJouee = j.jouer();
 
+		if (coupEstValide(pointJouee)) {
 			donneesJeu.manger(pointJouee);
+			donneesJeu.joueurSuivant();
+			donneesJeu.listeAnnuler.add(donneesJeu.creationTableauHistoriquePlateauJeu());
 
 			afficherPlateauJeu(); // fonction personnelle de vue
 
-			// ecriture dans arraylist annuler pour pouvoir revenir en arriere
-
-			donneesJeu.joueurSuivant();
-
 		}
 
-		donneesJeu.listeAnnuler.add(creationTableauHistoriquePlateauJeu());
+		//
+
+		// ecriture dans arraylist annuler pour pouvoir revenir en arriere
+
+		// donneesJeu.listeAnnuler.add(
+		//
+		// creationTableauHistoriquePlateauJeu());
 		// ici la partie est finie donc le joueur suivant a perdu. Ce joueur est
 		// incremente en fin de boucle donc c est ok
-		System.out.println("le joueur numero : " + donneesJeu.getJoueurCourant() + " a perdu");
+		// System.out.println("le joueur numero : " +
+		// donneesJeu.getJoueurCourant() + " a perdu");
 
 		// System.out.println("Affichage des valeurs dans le sens inverse pour
 		// verifier que stockage ok");
@@ -170,12 +161,12 @@ public class Controleur implements java.io.Serializable {
 
 	}
 
-	public void sauvegarder() {
+	public void sauvegarder(String fichierSauvegarder) {
 
 		ObjectOutputStream oos = null;
 
 		try {
-			final FileOutputStream fichier = new FileOutputStream("donneesJeu.ser");
+			final FileOutputStream fichier = new FileOutputStream(fichierSauvegarder);
 			oos = new ObjectOutputStream(fichier);
 			oos.writeObject(donneesJeu);
 			oos.flush();
@@ -193,10 +184,10 @@ public class Controleur implements java.io.Serializable {
 		}
 	}
 
-	public void charger() {
+	public void charger(String fichierCharger) {
 		ObjectInputStream ois = null;
 		try {
-			final FileInputStream fichierIn = new FileInputStream("donneesJeu.ser");
+			final FileInputStream fichierIn = new FileInputStream(fichierCharger);
 			ois = new ObjectInputStream(fichierIn);
 			donneesJeu = (Model) ois.readObject();
 		} catch (final java.io.IOException e) {

@@ -11,16 +11,19 @@ package IHM;
  */
 import java.awt.*;
 import javax.swing.*;
+import packageGaufre.*;
 
 class Grille extends JComponent {
     private boolean[][] b;
     private int ligne;
     private int colonne;
+    private Controleur c;
 
-    public Grille(boolean[][] b) {
+    public Grille(boolean[][] b, Controleur c) {
         this.b = b;
         ligne = b.length;
         colonne = b[0].length;
+        this.c = c;
     }
 
     public void traiterClic(Point m) {
@@ -32,18 +35,15 @@ class Grille extends JComponent {
         b[i][j] = !b[i][j];
     }
     
-    public void manger(Point pointJouee) {
-                Dimension p = getSize();
-                int x = pointJouee.x * colonne / p.width;
-                int y = pointJouee.y * ligne / p.height;
-
-		for (int i = y; i < this.ligne; i++) {
-			for (int j = x; j < this.colonne; j++) {
-				this.b[i][j] = false;
-			}
-		}
-
-	}
+//    public void manger(Point pointJouee) {
+//                
+//		for (int i = y; i < this.ligne; i++) {
+//			for (int j = x; j < this.colonne; j++) {
+//				this.b[i][j] = false;
+//			}
+//		}
+//
+//	}
 
     public void afficherCroix(int i, int j, Graphics2D drawable) {
         Dimension p = getSize();
